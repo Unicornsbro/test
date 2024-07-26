@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>プライバシーポリシー</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+        }
+        header {
+            background: linear-gradient(25deg, #cc33ff, #ff9933);
+            color: #fff;
+            padding: 20px 0;
+            border-bottom: #77aaff 3px solid;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
+        .logo {
+            width: 50px;
+            height: 50px;
+            position: absolute;
+            top: 10px;
+            left: 10px;
+        }
+        header h1 {
+            font-family: "hgp行書体";
+            margin: 0;
+            font-size: 2.5em;
+            text-align: center;
+        }
+        .search-container {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+        .search-button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            display: block;
+            margin-bottom: 10px;
+        }
+        .search-button img {
+            width: 24px;
+            height: 24px;
+        }
+        .hamburger-menu {
+            display: none;
+            cursor: pointer;
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+        }
+        .hamburger-menu div {
+            width: 30px;
+            height: 3px;
+            background-color: #fff;
+            margin: 5px 0;
+        }
+        .main-nav {
+            text-align: center;
+            margin-top: 40px;
+        }
+        .main-nav ul {
+            padding: 0;
+            list-style: none;
+            margin: 0;
+            display: inline-block;
+        }
+        .main-nav li {
+            display: inline;
+            margin: 0 20px;
+        }
+        .main-nav a {
+            color: #fff;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 18px;
+            font-family: "hgp行書体";
+            position: relative;
+            transition: color 0.3s;
+        }
+        .main-nav a::before {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: #fff;
+            visibility: hidden;
+            transform: scaleX(0);
+            transition: all 0.3s ease-in-out;
+        }
+        .main-nav a:hover::before {
+            visibility: visible;
+            transform: scaleX(1);
+        }
+        @media (max-width: 768px) {
+            .logo {
+                width: 40px;
+                height: 40px;
+            }
+            header h1 {
+                font-size: 1.8em; 
+                padding-top: 15px; 
+            }
+            .search-container {
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                display: block; 
+            }
+            .search-button {
+                margin-bottom: 5px;
+            }
+            .search-button img {
+                width: 20px;
+                height: 20px;
+            }
+            .hamburger-menu {
+                display: block;
+                position: absolute;
+                top: 40px;
+                right: 10px;
+            }
+            .main-nav {
+                display: none;
+                width: 100%;
+            }
+            .main-nav.active {
+                display: block;
+                text-align: center;
+                background-color: #cc33ff;
+                padding: 10px 0;
+            }
+            .main-nav ul {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-around;
+            }
+            .main-nav li {
+                width: 30%;
+                padding: 10px 0;
+            }
+            .main-nav a {
+                font-size: 16px;
+                padding: 5px 0;
+            }
+        }
+        @media (min-width: 769px) {
+            header {
+                padding-bottom: 40px; 
+            }
+        }
+        main {
+            padding: 20px 0;
+        }
+        .content {
+            background: #fff;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        footer {
+            background: linear-gradient(25deg, #ff9933, #cc33ff);
+            color: #fff;
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 30px;
+        }
+        .footer-links {
+            margin-bottom: 20px;
+        }
+        .footer-links a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 16px;
+            margin: 0 15px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="暇(隣接).png" class="logo" alt="Logo">
+        <h1>暇つぶしアプリ紹介所</h1>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="RPG.html">RPG</a></li>
+                <li><a href="#">パズルゲーム</a></li>
+                <li><a href="#">アクションゲーム</a></li>
+                <li><a href="#">クイズ</a></li>
+                <li><a href="#">マンガ</a></li>
+                <li><a href="#">マッチングアプリ</a></li>
+                <li><a href="#">配信アプリ</a></li>
+                <li><a href="#">SNS</a></li>
+                <li><a href="#">音楽</a></li>
+                <li><a href="#">画像編集</a></li>
+            </ul>
+        </nav>
+        <div class="search-container">
+            <button class="search-button" onclick="toggleSearch()">
+                <img src="search-icon.png" alt="Search">
+            </button>
+            <div class="hamburger-menu" onclick="toggleMenu()">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+    </header>
+    <main class="container">
+        <div class="content">
+            <h2>プライバシーポリシー</h2>
+            <h3>もくじ</h3>
+            <ol>
+                <li><a href="#section1">私たちについて</a></li>
+                <li><a href="#section2">コメント</a></li>
+                <li><a href="#section3">メディア</a></li>
+                <li><a href="#section4">Cookie</a></li>
+                <li><a href="#section5">他サイトからの埋め込みコンテンツ</a></li>
+                <li><a href="#section6">データを保存する期間</a></li>
+                <li><a href="#section7">データに対するあなたの権利</a></li>
+                <li><a href="#section8">あなたのデータの送信先</a></li>
+            </ol>
+
+            <h3 id="section1">私たちについて</h3>
+            <p>私たちのサイトアドレスは https://#### です。</p>
+
+            <h3 id="section2">コメント</h3>
+            <p>訪問者がこのサイトにコメントを残す際、コメントフォームに表示されているデータ、そしてスパム検出に役立てるための IP アドレスとブラウザーユーザーエージェント文字列を収集します。</p>
+
+            <h3 id="section3">メディア</h3>
+            <p>サイトに画像をアップロードする際、位置情報 (EXIF GPS) を含む画像をアップロードするべきではありません。サイトの訪問者は、サイトから画像をダウンロードして位置データを抽出することができます。</p>
+
+            <h3 id="section4">Cookie</h3>
+            <p>サイトにコメントを残す際、お名前、メールアドレス、サイトを Cookie に保存することにオプトインできます。これはあなたの便宜のためであり、他のコメントを残す際に詳細情報を再入力する手間を省きます。この Cookie は1年間保持されます。</p>
+            <p>もしあなたがアカウントを持っており、このサイトにログインすると、私たちはあなたのブラウザーが Cookie を受け入れられるかを判断するために一時 Cookie を設定します。この Cookie は個人データを含んでおらず、ブラウザーを閉じた時に廃棄されます。</p>
+            <p>ログインの際さらに、ログイン情報と画面表示情報を保持するため、私たちはいくつかの Cookie を設定します。ログイン Cookie は2日間、画面表示オプション Cookie は1年間保持されます。「ログイン状態を保存する」を選択した場合、ログイン情報は2週間維持されます。ログアウトするとログイン Cookie は消去されます。</p>
+            <p>もし投稿を編集または公開すると、さらなる Cookie がブラウザーに保存されます。この Cookie は個人データを含まず、単に変更した投稿の ID を示すものです。1日で有効期限が切れます。</p>
+
+            <h3 id="section5">他サイトからの埋め込みコンテンツ</h3>
+            <p>このサイトの投稿には埋め込みコンテンツ (動画、画像、投稿など) が含まれます。他サイトからの埋め込みコンテンツは、訪問者がそのサイトを訪れた場合とまったく同じように振る舞います。</p>
+            <p>これらのサイトは、あなたのデータの収集、Cookie の使用、サードパーティによる追加トラッキングの埋め込み、埋め込みコンテンツとのやりとりの監視を行うことがあります。アカウントを使ってそのサイトにログイン中の場合、埋め込みコンテンツとのやりとりのトラッキングも含まれます。</p>
+
+            <h3 id="section6">データを保存する期間</h3>
+            <p>あなたがコメントを残すと、コメントとそのメタデータが無期限に保持されます。これは、モデレーションキューにコメントを保持しておく代わりに、フォローアップのコメントを自動的に認識し承認できるようにするためです。</p>
+            <p>このサイトに登録したユーザーがいる場合、その方がユーザープロフィールページで提供した個人情報を保存します。すべてのユーザーは自分の個人情報を表示、編集、削除することができます (ただしユーザー名は変更することができません)。サイト管理者もそれらの情報を表示、編集できます。</p>
+
+            <h3 id="section7">データに対するあなたの権利</h3>
+            <p>このサイトのアカウントを持っているか、サイトにコメントを残したことがある場合、私たちが保持するあなたについての個人データ (提供したすべてのデータを含む) をエクスポートファイルとして受け取るリクエストを行うことができます。また、個人データの消去リクエストを行うこともできます。これには、管理、法律、セキュリティ目的のために保持する義務があるデータは含まれません。</p>
+
+            <h3 id="section8">あなたのデータの送信先</h3>
+            <p>訪問者によるコメントは、自動スパム検出サービスを通じて確認を行う場合があります。</p>
+        </div>
+    </main>
+    <footer>
+        <div class="footer-links">
+            <a href="#">Home</a>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Contact</a>
+        </div>
+        <p>Copyright © 2024 暇つぶしアプリ紹介所. All Rights Reserved.</p>
+    </footer>
+    <script>
+        function toggleMenu() {
+            const nav = document.querySelector('.main-nav');
+            nav.classList.toggle('active');
+        }
+
+        function toggleSearch() {
+            let searchBox = document.querySelector('.search-box');
+            if (!searchBox) {
+                searchBox = document.createElement('div');
+                searchBox.classList.add('search-box');
+                searchBox.innerHTML = `
+                    <input type="text" placeholder="サイト内検索..." onkeypress="search(event)">
+                    <button onclick="performSearch()">検索</button>
+                `;
+                document.body.appendChild(searchBox);
+            }
+            searchBox.classList.toggle('active');
+        }
+
+        function search(event) {
+            if (event.key === 'Enter') {
+                performSearch();
+            }
+        }
+
+        function performSearch() {
+            const query = document.querySelector('.search-box input').value;
+            if (query) {
+                console.log('検索クエリ:', query);
+                alert('検索クエリ: ' + query);
+            }
+        }
+    </script>
+</body>
+</html>

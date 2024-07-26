@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>暇つぶしアプリ紹介所 - RPG</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+        .main-content {
+            width: 70%;
+        }
+        .sidebar {
+            width: 25%;
+            background: #fff;
+            padding: 20px;
+            margin-left: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .sidebar h2 {
+            text-align: center;
+        }
+        header {
+            background: linear-gradient(25deg, #cc33ff, #ff9933);
+            color: #fff;
+            padding: 20px 0;
+            border-bottom: #77aaff 3px solid;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
+        .logo {
+            width: 50px;
+            height: 50px;
+            position: absolute;
+            top: 10px;
+            left: 10px;
+        }
+        header h1 {
+            font-family: "hgp行書体";
+            margin: 0;
+            font-size: 2.5em;
+            text-align: center;
+        }
+        .search-container {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+        .search-button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            display: block;
+            margin-bottom: 10px;
+        }
+        .search-button img {
+            width: 24px;
+            height: 24px;
+        }
+        .hamburger-menu {
+            display: none;
+            cursor: pointer;
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+        }
+        .hamburger-menu div {
+            width: 30px;
+            height: 3px;
+            background-color: #fff;
+            margin: 5px 0;
+        }
+        .main-nav {
+            text-align: center;
+            margin-top: 40px;
+        }
+        .main-nav ul {
+            padding: 0;
+            list-style: none;
+            margin: 0;
+            display: inline-block;
+        }
+        .main-nav li {
+            display: inline;
+            margin: 0 20px;
+        }
+        .main-nav a {
+            color: #fff;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 18px;
+            font-family: "hgp行書体";
+            position: relative;
+            transition: color 0.3s;
+        }
+        .main-nav a::before {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: #fff;
+            visibility: hidden;
+            transform: scaleX(0);
+            transition: all 0.3s ease-in-out;
+        }
+        .main-nav a:hover::before {
+            visibility: visible;
+            transform: scaleX(1);
+        }
+        @media (max-width: 768px) {
+            .logo {
+                width: 40px;
+                height: 40px;
+            }
+            header h1 {
+                font-size: 1.8em; 
+                padding-top: 15px; 
+            }
+            .search-container {
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                display: block; 
+            }
+            .search-button {
+                margin-bottom: 5px;
+            }
+            .search-button img {
+                width: 20px;
+                height: 20px;
+            }
+            .hamburger-menu {
+                display: block;
+                position: absolute;
+                top: 40px;
+                right: 10px;
+            }
+            .main-nav {
+                display: none;
+                width: 100%;
+            }
+            .main-nav.active {
+                display: block;
+                text-align: center;
+                background-color: #cc33ff;
+                padding: 10px 0;
+            }
+            .main-nav ul {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-around;
+            }
+            .main-nav li {
+                width: 30%;
+                padding: 10px 0;
+            }
+            .main-nav a {
+                font-size: 16px;
+                padding: 5px 0;
+            }
+        }
+        @media (min-width: 769px) {
+            header {
+                padding-bottom: 40px; 
+            }
+        }
+        .recommended-apps {
+            margin: 20px 0;
+        }
+        .app-item-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        .app-item {
+            width: 30%;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .app-item img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .app-item a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+            display: block;
+            margin-top: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .app-item-list {
+                justify-content: center;
+            }
+            .app-item {
+                width: 45%;
+                margin: 10px 2.5%;
+            }
+            .container {
+                flex-direction: column;
+                align-items: center;
+            }
+            .main-content, .sidebar {
+                width: 100%;
+                margin: 0;
+            }
+        }
+        main {
+            padding: 20px 0;
+            display: flex;
+        }
+        article {
+            background: #fff;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .post-meta {
+            color: #555;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+        .post-image {
+            width: 100%;
+            height: auto;
+            margin: 20px 0;
+        }
+        .review-section {
+            margin: 20px 0;
+        }
+        .review-item {
+            display: none;
+        }
+        .review-item.active {
+            display: block;
+        }
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        .pagination a {
+            margin: 0 5px;
+            padding: 8px 12px;
+            text-decoration: none;
+            background: #cc33ff;
+            color: #fff;
+            border-radius: 5px;
+        }
+        .pagination a:hover {
+            background: #ff9933;
+        }
+        footer {
+            background: linear-gradient(25deg, #ff9933, #cc33ff);
+            color: #fff;
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 30px;
+        }
+        .footer-links {
+            margin-bottom: 20px;
+        }
+        .footer-links a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 16px;
+            margin: 0 15px;
+        }
+        .kuwashiku {
+            display: block;
+        }
+        .affiliate-link {
+            display: inline-block;
+            background: #e478ff;
+            color: #fff !important; /* 文字色を白に強制設定 */
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        .affiliate-link:hover {
+            background: #555;
+        }
+        @media (max-width: 768px) {
+            .affiliate-link {
+                font-size: 12px; /* スマホ版でのボタン文字サイズを調整 */
+                padding: 8px 16px; /* スマホ版でのボタンパディングを調整 */
+            }
+            .ranking-section h2 {
+                font-size: 1.2em; /* スマホ版での見出しサイズを調整 */
+            }
+        }
+        .ranking-section {
+            background: #fff;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .ranking-section h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .ranking-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+        .ranking-item img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            margin-right: 20px;
+        }
+        .ranking-item .details {
+            flex-grow: 1;
+        }
+        .ranking-item .details h3 {
+            margin: 0;
+            font-size: 1.2em;
+            color: #333;
+        }
+        .ranking-item .details p {
+            margin: 5px 0;
+            color: #666;
+        }
+        .ranking-item .details a {
+            color: #cc33ff;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="暇(隣接).png" class="logo" alt="Logo">
+        <h1>暇つぶしアプリ紹介所</h1>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="RPG.html">RPG</a></li>
+                <li><a href="#">パズルゲーム</a></li>
+                <li><a href="#">アクションゲーム</a></li>
+                <li><a href="#">クイズ</a></li>
+                <li><a href="#">マンガ</a></li>
+                <li><a href="#">マッチングアプリ</a></li>
+                <li><a href="#">配信アプリ</a></li>
+                <li><a href="#">SNS</a></li>
+                <li><a href="#">音楽</a></li>
+                <li><a href="#">画像編集</a></li>
+            </ul>
+        </nav>
+        <div class="search-container">
+            <button class="search-button" onclick="toggleSearch()">
+                <img src="search-icon.png" alt="Search">
+            </button>
+            <div class="hamburger-menu" onclick="toggleMenu()">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+    </header>
+    <main class="container">
+        <div class="main-content">
+            <!-- RPGランキングセクション -->
+            <section class="ranking-section">
+                <h2>RPGランキング</h2>
+                <div class="ranking-item">
+                    <img src="rpg1.jpg" alt="RPG 1">
+                    <div class="details">
+                        <h3>崩壊：スターレイル</h3>
+                        <p>「崩壊」シリーズのスピンオフで、プレイヤーはスターレイル（星間列車）に乗り、異なる惑星を巡りながら壮大な冒険を繰り広げます。キャラクターを集め、育成し、ターン制バトルに挑むことで物語を進めます。</p>
+                        <a href="#" class="kuwashiku">詳しく見る</a>
+                        <a href="https://example.com/affiliate-link1" class="affiliate-link">今すぐダウンロード</a>
+                    </div>
+                </div>
+                <div class="ranking-item">
+                    <img src="rpg2.jpg" alt="RPG 2">
+                    <div class="details">
+                        <h3>原神</h3>
+                        <p>「旅人」として、兄妹のどちらかを選び、異世界の大陸「テイワット」を探索します。各地に広がる広大なフィールドや美しい景観、ダンジョンなどを冒険しながら、多様なキャラクターを仲間にしていきます。元素システムを駆使したバトルや、パズル要素、料理、クラフトなどの多彩な要素が詰まったゲームです。</p>
+                        <a href="#" class="kuwashiku">詳しく見る</a>
+                        <a href="https://example.com/affiliate-link2" class="affiliate-link">今すぐダウンロード</a>
+                    </div>
+                </div>
+                <div class="ranking-item">
+                    <img src="rpg3.jpg" alt="RPG 3">
+                    <div class="details">
+                        <h3>リバース１９９９</h3>
+                        <p>時間旅行がテーマで、未来と過去を行き来しながら、歴史を修正し、未来を守るための冒険を繰り広げます。プレイヤーは様々な時代や文化を背景にしたステージで、敵と戦い、パズルを解きながらストーリーを進めます。</p>
+                        <a href="#" class="kuwashiku">詳しく見る</a>
+                        <a href="https://example.com/affiliate-link3" class="affiliate-link">今すぐダウンロード</a>
+                    </div>
+                </div>
+                <div class="ranking-item">
+                    <img src="rpg3.jpg" alt="RPG 3">
+                    <div class="details">
+                        <h3>ゲーム名3</h3>
+                        <p>広大なオープンワールドを冒険し、モンスターを捕獲して育成し、ターン制バトルで戦います。シングルプレイヤーのストーリーモードに加え、他のプレイヤーとリアルタイムで対戦できるオンラインモードもあります。</p>
+                        <a href="#" class="kuwashiku">詳しく見る</a>
+                        <a href="https://example.com/affiliate-link3" class="affiliate-link">今すぐダウンロード</a>
+                    </div>
+                </div>
+                <div class="ranking-item">
+                    <img src="rpg3.jpg" alt="RPG 3">
+                    <div class="details">
+                        <h3>幻想神域</h3>
+                        <p>「イデア」と呼ばれる召喚獣と共にファンタジー世界を冒険します。多彩な職業やスキルツリーがあり、自分だけのキャラクターを育てることができます。PvEコンテンツやPvPコンテンツが豊富で、他のプレイヤーと協力して強力な敵に挑むことができます。</p>
+                        <a href="#" class="kuwashiku">詳しく見る</a>
+                        <a href="https://example.com/affiliate-link3" class="affiliate-link">今すぐダウンロード</a>
+                    </div>
+                </div>
+                <div class="ranking-item">
+                    <img src="rpg3.jpg" alt="RPG 3">
+                    <div class="details">
+                        <h3>キノコ伝説</h3>
+                        <p>キノコのキャラクターを操作し、魔法やスキルを駆使して敵と戦い、さまざまなクエストをクリアしていきます。ゲームの世界は、キノコの王国や森、洞窟などのユニークな環境で構成されており、探索や収集要素も豊富です。</p>
+                        <a href="#" class="kuwashiku">詳しく見る</a>
+                        <a href="https://example.com/affiliate-link3" class="affiliate-link">今すぐダウンロード</a>
+                    </div>
+                </div>
+                <!-- さらにランキングアイテムを追加できます -->
+            </section>
+        </div>
+        <aside class="sidebar">
+            <h2>カテゴリー</h2>
+            <ul>
+                <li>RPG</li>
+                <li>パズル</li>
+                <li>アクション</li>
+                <li>マッチングアプリ</li>
+                <li>遊び相手探し</li>
+                <li>恋人探し</li>
+                <li>配信アプリ</li>
+                <li>Vtuber</li>
+                <li>美男美女</li>
+                <li>歌ってみた</li>
+            </ul>
+            <h2>タグ</h2>
+            <ul>
+                <li>ロイヤルマッチ</li>
+                <li>崩壊スターレイル</li>
+                <li>三国志真戦</li>
+                <li>荒野行動</li>
+                <li>スプラトゥーン</li>
+                <li>Tinder</li>
+                <li>タップル</li>
+                <li>omiai</li>
+                <li>with</li>
+                <li>ペアーズ</li>
+                <li>Pococha</li>
+                <li>17LIVE</li>
+                <li>BIGO live</li>
+                <li>IRIAM</li>
+            </ul>
+            <h2>アーカイブ</h2>
+            <ul>
+                <li>2024年6月</li>
+                <li>2024年7月</li>
+            </ul>
+        </aside>
+    </main>
+    <footer>
+        <div class="footer-links">
+            <a href="#">Home</a>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Contact</a>
+        </div>
+        <p>Copyright © 2024 暇つぶしアプリ紹介所. All Rights Reserved.</p>
+    </footer>
+    <script>
+        function toggleMenu() {
+            const nav = document.querySelector('.main-nav');
+            nav.classList.toggle('active');
+        }
+
+        function showReview(page) {
+            const reviews = document.querySelectorAll('.review-item');
+            reviews.forEach((review, index) => {
+                review.classList.remove('active');
+                if (page === 1 && index < 5) {
+                    review.classList.add('active');
+                } else if (page === 2 && index >= 5) {
+                    review.classList.add('active');
+                }
+            });
+        }
+
+        function toggleSearch() {
+            let searchBox = document.querySelector('.search-box');
+            if (!searchBox) {
+                searchBox = document.createElement('div');
+                searchBox.classList.add('search-box');
+                searchBox.innerHTML = `
+                    <input type="text" placeholder="サイト内検索..." onkeypress="search(event)">
+                    <button onclick="performSearch()">検索</button>
+                `;
+                document.body.appendChild(searchBox);
+            }
+            searchBox.classList.toggle('active');
+        }
+
+        function search(event) {
+            if (event.key === 'Enter') {
+                performSearch();
+            }
+        }
+
+        function performSearch() {
+            const query = document.querySelector('.search-box input').value;
+            if (query) {
+                // Implement search functionality here
+                console.log('検索クエリ:', query);
+                alert('検索クエリ: ' + query);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            showReview(1); // Show first page of reviews by default
+        });
+    </script>
+</body>
+</html>

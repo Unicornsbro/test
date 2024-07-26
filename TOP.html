@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>暇つぶしアプリ紹介所</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+        .main-content {
+            width: 70%;
+        }
+        .sidebar {
+            width: 25%;
+            background: #fff;
+            padding: 20px;
+            margin-left: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .sidebar h2 {
+            text-align: center;
+        }
+        header {
+            background: linear-gradient(25deg, #cc33ff, #ff9933);
+            color: #fff;
+            padding: 20px 0;
+            border-bottom: #77aaff 3px solid;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
+        .logo {
+            width: 50px;
+            height: 50px;
+            position: absolute;
+            top: 10px;
+            left: 10px;
+        }
+        header h1 {
+            font-family: "hgp行書体";
+            margin: 0;
+            font-size: 2.5em;
+            text-align: center;
+        }
+        .search-container {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+        .search-button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            display: block;
+            margin-bottom: 10px;
+        }
+        .search-button img {
+            width: 24px;
+            height: 24px;
+        }
+        .hamburger-menu {
+            display: none;
+            cursor: pointer;
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+        }
+        .hamburger-menu div {
+            width: 30px;
+            height: 3px;
+            background-color: #fff;
+            margin: 5px 0;
+        }
+        .main-nav {
+            text-align: center;
+            margin-top: 40px;
+        }
+        .main-nav ul {
+            padding: 0;
+            list-style: none;
+            margin: 0;
+            display: inline-block;
+        }
+        .main-nav li {
+            display: inline;
+            margin: 0 20px;
+        }
+        .main-nav a {
+            color: #fff;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 18px;
+            font-family: "hgp行書体";
+            position: relative;
+            transition: color 0.3s;
+        }
+        .main-nav a::before {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: #fff;
+            visibility: hidden;
+            transform: scaleX(0);
+            transition: all 0.3s ease-in-out;
+        }
+        .main-nav a:hover::before {
+            visibility: visible;
+            transform: scaleX(1);
+        }
+        .sub-nav {
+            margin-top: 10px;
+        }
+        .sub-nav ul {
+            padding: 0;
+            list-style: none;
+            margin: 0;
+            display: inline-block;
+        }
+        .sub-nav li {
+            display: inline;
+            margin: 0 20px;
+        }
+        .sub-nav a {
+            color: #fff;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 18px;
+            font-family: "hgp行書体";
+            position: relative;
+            transition: color 0.3s;
+        }
+        .sub-nav a::before {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: #fff;
+            visibility: hidden;
+            transform: scaleX(0);
+            transition: all 0.3s ease-in-out;
+        }
+        .sub-nav a:hover::before {
+            visibility: visible;
+            transform: scaleX(1);
+        }
+        @media (max-width: 768px) {
+            .logo {
+                width: 40px;
+                height: 40px;
+            }
+            header h1 {
+                font-size: 1.8em; 
+                padding-top: 15px; 
+            }
+            .search-container {
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                display: block; 
+            }
+            .search-button {
+                margin-bottom: 5px;
+            }
+            .search-button img {
+                width: 20px;
+                height: 20px;
+            }
+            .hamburger-menu {
+                display: block;
+                position: absolute;
+                top: 40px;
+                right: 10px;
+            }
+            .main-nav {
+                display: none;
+                width: 100%;
+            }
+            .main-nav.active {
+                display: block;
+                text-align: center;
+                background-color: #cc33ff;
+                padding: 10px 0;
+            }
+            .main-nav ul {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-around;
+            }
+            .main-nav li {
+                width: 30%;
+                padding: 10px 0;
+            }
+            .main-nav a {
+                font-size: 16px;
+                padding: 5px 0;
+            }
+            .sub-nav {
+                display: none;
+                width: 100%;
+            }
+            .sub-nav.active {
+                display: block;
+                text-align: center;
+                background-color: #cc33ff;
+                padding: 10px 0;
+            }
+            .sub-nav ul {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-around;
+            }
+            .sub-nav li {
+                width: 30%;
+                padding: 10px 0;
+            }
+            .sub-nav a {
+                font-size: 16px;
+                padding: 5px 0;
+            }
+        }
+        @media (min-width: 769px) {
+            header {
+                padding-bottom: 40px; 
+            }
+        }
+        .recommended-apps {
+            margin: 20px 0;
+        }
+        .app-item-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        .app-item {
+            width: 30%;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .app-item img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .app-item a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+            display: block;
+            margin-top: 10px;
+        }
+        @media (max-width: 768px) {
+            .app-item-list {
+                justify-content: center;
+            }
+            .app-item {
+                width: 45%;
+                margin: 10px 2.5%;
+            }
+            .container {
+                flex-direction: column;
+                align-items: center;
+            }
+            .main-content, .sidebar {
+                width: 100%;
+                margin: 0;
+            }
+        }
+        main {
+            padding: 20px 0;
+            display: flex;
+        }
+        article {
+            background: #fff;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .post-meta {
+            color: #555;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+        .post-image {
+            width: 100%;
+            height: auto;
+            margin: 20px 0;
+        }
+        .review-section {
+            margin: 20px 0;
+        }
+        .review-item {
+            display: none;
+        }
+        .review-item.active {
+            display: block;
+        }
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        .pagination a {
+            margin: 0 5px;
+            padding: 8px 12px;
+            text-decoration: none;
+            background: #cc33ff;
+            color: #fff;
+            border-radius: 5px;
+        }
+        .pagination a:hover {
+            background: #ff9933;
+        }
+        footer {
+            background: linear-gradient(25deg, #ff9933, #cc33ff);
+            color: #fff;
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 30px;
+        }
+        .footer-links {
+            margin-bottom: 20px;
+        }
+        .footer-links a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 16px;
+            margin: 0 15px;
+        }
+        .affiliate-link {
+            display: inline-block;
+            background: #e478ff;
+            color: #fff;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        .affiliate-link:hover {
+            background: #555;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="暇(隣接).png" class="logo" alt="Logo">
+        <h1>暇つぶしアプリ紹介所</h1>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="RPG.html">RPG</a></li>
+                <li><a href="#">パズルゲーム</a></li>
+                <li><a href="#">アクションゲーム</a></li>
+                <li><a href="#">クイズ</a></li>
+                <li><a href="#">マンガ</a></li>
+                <li><a href="#">マッチングアプリ</a></li>
+                <li><a href="#">配信アプリ</a></li>
+                <li><a href="#">SNS</a></li>
+                <li><a href="#">音楽</a></li>
+                <li><a href="#">画像編集</a></li>
+            </ul>
+        </nav>
+        <div class="search-container">
+            <button class="search-button" onclick="toggleSearch()">
+                <img src="search-icon.png" alt="Search">
+            </button>
+            <div class="hamburger-menu" onclick="toggleMenu()">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+    </header>
+    <main class="container">
+        <div class="main-content">
+            <section id="games" class="recommended-apps">
+                <h2>ゲーム</h2>
+                <div class="app-item-list">
+                    <div class="app-item"><a href="#"><img src="game1-thumbnail.jpg" alt="Game 1"><span>ゲーム1</span></a></div>
+                    <div class="app-item"><a href="#"><img src="game2-thumbnail.jpg" alt="Game 2"><span>ゲーム2</span></a></div>
+                    <div class="app-item"><a href="#"><img src="game3-thumbnail.jpg" alt="Game 3"><span>ゲーム3</span></a></div>
+                    <div class="app-item"><a href="#"><img src="game4-thumbnail.jpg" alt="Game 4"><span>ゲーム4</span></a></div>
+                    <div class="app-item"><a href="#"><img src="game5-thumbnail.jpg" alt="Game 5"><span>ゲーム5</span></a></div>
+                    <div class="app-item"><a href="#"><img src="game6-thumbnail.jpg" alt="Game 6"><span>ゲーム6</span></a></div>
+                    <div class="app-item"><a href="#"><img src="game7-thumbnail.jpg" alt="Game 7"><span>ゲーム7</span></a></div>
+                    <div class="app-item"><a href="#"><img src="game8-thumbnail.jpg" alt="Game 8"><span>ゲーム8</span></a></div>
+                    <div class="app-item"><a href="#"><img src="game9-thumbnail.jpg" alt="Game 9"><span>ゲーム9</span></a></div>
+                </div>
+            </section>
+            <section id="manga-apps" class="recommended-apps">
+                <h2>マンガ</h2>
+                <div class="app-item-list">
+                    <div class="app-item"><a href="#"><img src="manga1-thumbnail.jpg" alt="Manga 1"><span>マンガ1</span></a></div>
+                    <div class="app-item"><a href="#"><img src="manga2-thumbnail.jpg" alt="Manga 2"><span>マンガ2</span></a></div>
+                    <div class="app-item"><a href="#"><img src="manga3-thumbnail.jpg" alt="Manga 3"><span>マンガ3</span></a></div>
+                    <div class="app-item"><a href="#"><img src="manga4-thumbnail.jpg" alt="Manga 4"><span>マンガ4</span></a></div>
+                    <div class="app-item"><a href="#"><img src="manga5-thumbnail.jpg" alt="Manga 5"><span>マンガ5</span></a></div>
+                    <div class="app-item"><a href="#"><img src="manga6-thumbnail.jpg" alt="Manga 6"><span>マンガ6</span></a></div>
+                </div>
+            </section>
+            <section id="matching-apps" class="recommended-apps">
+                <h2>マッチングアプリ</h2>
+                <div class="app-item-list">
+                    <div class="app-item"><a href="#"><img src="matching1-thumbnail.jpg" alt="Matching App 1"><span>マッチングアプリ1</span></a></div>
+                    <div class="app-item"><a href="#"><img src="matching2-thumbnail.jpg" alt="Matching App 2"><span>マッチングアプリ2</span></a></div>
+                    <div class="app-item"><a href="#"><img src="matching3-thumbnail.jpg" alt="Matching App 3"><span>マッチングアプリ3</span></a></div>
+                    <div class="app-item"><a href="#"><img src="matching4-thumbnail.jpg" alt="Matching App 4"><span>マッチングアプリ4</span></a></div>
+                    <div class="app-item"><a href="#"><img src="matching5-thumbnail.jpg" alt="Matching App 5"><span>マッチングアプリ5</span></a></div>
+                    <div class="app-item"><a href="#"><img src="matching6-thumbnail.jpg" alt="Matching App 6"><span>マッチングアプリ6</span></a></div>
+                </div>
+            </section>
+            <section id="streaming-apps" class="recommended-apps">
+                <h2>配信アプリ</h2>
+                <div class="app-item-list">
+                    <div class="app-item"><a href="#"><img src="streaming1-thumbnail.jpg" alt="Streaming App 1"><span>配信アプリ1</span></a></div>
+                    <div class="app-item"><a href="#"><img src="streaming2-thumbnail.jpg" alt="Streaming App 2"><span>配信アプリ2</span></a></div>
+                    <div class="app-item"><a href="#"><img src="streaming3-thumbnail.jpg" alt="Streaming App 3"><span>配信アプリ3</span></a></div>
+                    <div class="app-item"><a href="#"><img src="streaming4-thumbnail.jpg" alt="Streaming App 4"><span>配信アプリ4</span></a></div>
+                    <div class="app-item"><a href="#"><img src="streaming5-thumbnail.jpg" alt="Streaming App 5"><span>配信アプリ5</span></a></div>
+                    <div class="app-item"><a href="#"><img src="streaming6-thumbnail.jpg" alt="Streaming App 6"><span>配信アプリ6</span></a></div>
+                </div>
+            </section>
+            <section id="sns-apps" class="recommended-apps">
+                <h2>SNS</h2>
+                <div class="app-item-list">
+                    <div class="app-item"><a href="#"><img src="sns1-thumbnail.jpg" alt="SNS App 1"><span>SNSアプリ1</span></a></div>
+                    <div class="app-item"><a href="#"><img src="sns2-thumbnail.jpg" alt="SNS App 2"><span>SNSアプリ2</span></a></div>
+                    <div class="app-item"><a href="#"><img src="sns3-thumbnail.jpg" alt="SNS App 3"><span>SNSアプリ3</span></a></div>
+                </div>
+            </section>
+            <section id="music-apps" class="recommended-apps">
+                <h2>音楽</h2>
+                <div class="app-item-list">
+                    <div class="app-item"><a href="#"><img src="music1-thumbnail.jpg" alt="Music App 1"><span>音楽アプリ1</span></a></div>
+                    <div class="app-item"><a href="#"><img src="music2-thumbnail.jpg" alt="Music App 2"><span>音楽アプリ2</span></a></div>
+                    <div class="app-item"><a href="#"><img src="music3-thumbnail.jpg" alt="Music App 3"><span>音楽アプリ3</span></a></div>
+                </div>
+            </section>
+            <section id="image-editing-apps" class="recommended-apps">
+                <h2>画像編集</h2>
+                <div class="app-item-list">
+                    <div class="app-item"><a href="#"><img src="imageediting1-thumbnail.jpg" alt="Image Editing App 1"><span>画像編集アプリ1</span></a></div>
+                    <div class="app-item"><a href="#"><img src="imageediting2-thumbnail.jpg" alt="Image Editing App 2"><span>画像編集アプリ2</span></a></div>
+                    <div class="app-item"><a href="#"><img src="imageediting3-thumbnail.jpg" alt="Image Editing App 3"><span>画像編集アプリ3</span></a></div>
+                </div>
+            </section>
+            <section id="latest-reviews" class="review-section">
+                <h2>最新レビュー記事</h2>
+                <div id="review-1" class="review-item active">
+                    <article>
+                        <h3>レビュー1のタイトル</h3>
+                        <div class="post-meta">2024年6月15日</div>
+                        <img src="review1-thumbnail.jpg" alt="Review 1" class="post-image">
+                        <p>レビュー1の概要...</p>
+                    </article>
+                </div>
+                <div id="review-2" class="review-item">
+                    <article>
+                        <h3>レビュー2のタイトル</h3>
+                        <div class="post-meta">2024年6月14日</div>
+                        <img src="review2-thumbnail.jpg" alt="Review 2" class="post-image">
+                        <p>レビュー2の概要...</p>
+                    </article>
+                </div>
+                <div id="review-3" class="review-item">
+                    <article>
+                        <h3>レビュー3のタイトル</h3>
+                        <div class="post-meta">2024年6月13日</div>
+                        <img src="review3-thumbnail.jpg" alt="Review 3" class="post-image">
+                        <p>レビュー3の概要...</p>
+                    </article>
+                </div>
+                <div id="review-4" class="review-item">
+                    <article>
+                        <h3>レビュー4のタイトル</h3>
+                        <div class="post-meta">2024年6月12日</div>
+                        <img src="review4-thumbnail.jpg" alt="Review 4" class="post-image">
+                        <p>レビュー4の概要...</p>
+                    </article>
+                </div>
+                <div id="review-5" class="review-item">
+                    <article>
+                        <h3>レビュー5のタイトル</h3>
+                        <div class="post-meta">2024年6月11日</div>
+                        <img src="review5-thumbnail.jpg" alt="Review 5" class="post-image">
+                        <p>レビュー5の概要...</p>
+                    </article>
+                </div>
+                <div id="review-6" class="review-item">
+                    <article>
+                        <h3>レビュー6のタイトル</h3>
+                        <div class="post-meta">2024年6月10日</div>
+                        <img src="review6-thumbnail.jpg" alt="Review 6" class="post-image">
+                        <p>レビュー6の概要...</p>
+                    </article>
+                </div>
+                <div id="review-7" class="review-item">
+                    <article>
+                        <h3>レビュー7のタイトル</h3>
+                        <div class="post-meta">2024年6月9日</div>
+                        <img src="review7-thumbnail.jpg" alt="Review 7" class="post-image">
+                        <p>レビュー7の概要...</p>
+                    </article>
+                </div>
+                <div id="review-8" class="review-item">
+                    <article>
+                        <h3>レビュー8のタイトル</h3>
+                        <div class="post-meta">2024年6月8日</div>
+                        <img src="review8-thumbnail.jpg" alt="Review 8" class="post-image">
+                        <p>レビュー8の概要...</p>
+                    </article>
+                </div>
+                <div id="review-9" class="review-item">
+                    <article>
+                        <h3>レビュー9のタイトル</h3>
+                        <div class="post-meta">2024年6月7日</div>
+                        <img src="review9-thumbnail.jpg" alt="Review 9" class="post-image">
+                        <p>レビュー9の概要...</p>
+                    </article>
+                </div>
+                <div id="review-10" class="review-item">
+                    <article>
+                        <h3>レビュー10のタイトル</h3>
+                        <div class="post-meta">2024年6月6日</div>
+                        <img src="review10-thumbnail.jpg" alt="Review 10" class="post-image">
+                        <p>レビュー10の概要...</p>
+                    </article>
+                </div>
+                <div class="pagination">
+                    <a href="#" onclick="showReview(1)">1</a>
+                    <a href="#" onclick="showReview(2)">2</a>
+                </div>
+            </section>
+        </div>
+        <aside class="sidebar">
+            <h2>カテゴリー</h2>
+            <ul>
+                <li>RPG</li>
+                <li>パズル</li>
+                <li>アクション</li>
+                <li>マッチングアプリ</li>
+                <li>遊び相手探し</li>
+                <li>恋人探し</li>
+                <li>配信アプリ</li>
+                <li>Vtuber</li>
+                <li>美男美女</li>
+                <li>歌ってみた</li>
+            </ul>
+            <h2>タグ</h2>
+            <ul>
+                <li>ロイヤルマッチ</li>
+                <li>崩壊スターレイル</li>
+                <li>三国志真戦</li>
+                <li>荒野行動</li>
+                <li>スプラトゥーン</li>
+                <li>Tinder</li>
+                <li>タップル</li>
+                <li>omiai</li>
+                <li>with</li>
+                <li>ペアーズ</li>
+                <li>Pococha</li>
+                <li>17LIVE</li>
+                <li>BIGO live</li>
+                <li>IRIAM</li>
+            </ul>
+            <h2>アーカイブ</h2>
+            <ul>
+                <li>2024年6月</li>
+                <li>2024年7月</li>
+            </ul>
+        </aside>
+    </main>
+    <footer>
+        <div class="footer-links">
+            <a href="#">Home</a>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Contact</a>
+        </div>
+        <p>Copyright © 2024 暇つぶしアプリ紹介所. All Rights Reserved.</p>
+    </footer>
+    <script>
+        function toggleMenu() {
+            const nav = document.querySelector('.main-nav');
+            nav.classList.toggle('active');
+        }
+
+        function showReview(page) {
+            const reviews = document.querySelectorAll('.review-item');
+            reviews.forEach((review, index) => {
+                review.classList.remove('active');
+                if (page === 1 && index < 5) {
+                    review.classList.add('active');
+                } else if (page === 2 && index >= 5) {
+                    review.classList.add('active');
+                }
+            });
+        }
+
+        function toggleSearch() {
+            let searchBox = document.querySelector('.search-box');
+            if (!searchBox) {
+                searchBox = document.createElement('div');
+                searchBox.classList.add('search-box');
+                searchBox.innerHTML = `
+                    <input type="text" placeholder="サイト内検索..." onkeypress="search(event)">
+                    <button onclick="performSearch()">検索</button>
+                `;
+                document.body.appendChild(searchBox);
+            }
+            searchBox.classList.toggle('active');
+        }
+
+        function search(event) {
+            if (event.key === 'Enter') {
+                performSearch();
+            }
+        }
+
+        function performSearch() {
+            const query = document.querySelector('.search-box input').value;
+            if (query) {
+                // Implement search functionality here
+                console.log('検索クエリ:', query);
+                alert('検索クエリ: ' + query);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            showReview(1); // Show first page of reviews by default
+        });
+    </script>
+</body>
+</html>
